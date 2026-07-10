@@ -151,6 +151,155 @@ function ThemeSelector() {
 
 O bloco `@theme` no `src/index.css` precisa listar os nomes das variáveis, pois é isso que gera as classes utilitárias (`bg-primary-500`, `text-muted-700`) em tempo de build. Isso só precisa ser editado ao criar uma **categoria de token nova** (ex: `success`, `danger`) — nunca ao criar um tema novo.
 
+## SEO
+
+O projeto inclui uma camada de SEO baseada em **react-helmet-async**, permitindo configurar metadados por página de forma declarativa.
+
+O provider já está configurado dentro dos providers globais da aplicação, portanto nenhuma configuração adicional é necessária.
+
+### Estrutura
+
+```text
+src/
+└── seo/
+    ├── SEO.tsx
+    ├── defaultSeo.ts
+    ├── index.ts
+    └── types.ts
+```
+
+### Configuração padrão
+
+O arquivo `src/seo/defaultSeo.ts` centraliza os valores padrão utilizados pela aplicação:
+
+```ts
+export const defaultSeo = {
+    title: "React Starter",
+    description: "Projeto base React com TypeScript, React Query e Zustand.",
+    keywords: "react, typescript, vite, react query, zustand",
+    siteName: "React Starter",
+    image: "/og-image.png",
+    robots: "index,follow",
+};
+```
+
+Ao iniciar um novo projeto, recomenda-se atualizar esses valores para refletir a identidade da aplicação.
+
+### Uso básico
+
+Em qualquer página:
+
+```tsx
+import { SEO } from "@/seo";
+
+export function HomePage() {
+    return (
+        <>
+            <SEO
+                title="Home"
+                description="Página inicial da aplicação"
+            />
+
+            <h1>Home</h1>
+        </>
+    );
+}
+```
+
+Isso gera automaticamente:
+
+- `<title>`
+- `<meta name="description">`
+- `<meta name="keywords">`
+- `<meta name="robots">`
+- Open Graph (`og:*`)
+- Twitter Cards (`twitter:*`)
+
+### Canonical URL
+
+Para evitar conteúdo duplicado em mecanismos de busca:
+
+```tsx
+<SEO
+    title="Produtos"
+    canonical="https://meusite.com/produtos"
+/>
+```
+
+### Open Graph
+
+O componente já gera automaticamente as tags Open Graph usando os valores informados:
+
+```tsx
+<SEO
+    title="Produto X"
+    description="Descrição do produto"
+    image="https://meusite.com/imagens/produto-x.png"
+/>
+```
+
+Isso melhora a exibição ao compartilhar links em:
+
+- WhatsApp
+- LinkedIn
+- Facebook
+- Discord
+- Telegram
+
+### Dados estruturados (JSON-LD)
+
+Também é possível fornecer dados estruturados para mecanismos de busca:
+
+```tsx
+<SEO
+    title="Empresa XYZ"
+    description="Consultoria em tecnologia"
+    structuredData={{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Empresa XYZ",
+        url: "https://empresa.com",
+    }}
+/>
+```
+
+O objeto será convertido automaticamente para um bloco:
+
+```html
+<script type="application/ld+json">
+```
+
+permitindo integração com recursos avançados do Google Search.
+
+### Tipagem disponível
+
+```ts
+interface SEOProps {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    canonical?: string;
+    image?: string;
+    robots?: string;
+
+    structuredData?: Record<string, unknown>;
+}
+```
+
+### Boas práticas
+
+- Toda página pública deve possuir `title` e `description`.
+- Utilize `canonical` em páginas indexáveis.
+- Utilize `structuredData` para páginas institucionais, produtos, artigos ou organizações.
+- Evite títulos genéricos repetidos em múltiplas páginas.
+- Prefira descrições entre 120 e 160 caracteres para melhor exibição nos resultados de busca.
+
+### Limitação
+
+Este template utiliza **React SPA (Client-Side Rendering)**. Os mecanismos de busca modernos conseguem indexar esse formato, porém aplicações com SSR (Server-Side Rendering) ou SSG (Static Site Generation) possuem vantagem para SEO extremamente competitivo.
+
+Para a maioria dos sites institucionais, dashboards públicos, landing pages e sistemas SaaS, a implementação incluída é suficiente e segue as práticas modernas recomendadas.
+
 ## Scripts
 
 ```bash

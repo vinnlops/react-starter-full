@@ -1,11 +1,14 @@
 import type { PropsWithChildren } from "react";
 
 import { QueryProvider } from "./QueryProvider";
+import { HelmetProvider } from "./HelmetProvider";
 
 export function AppProviders({ children }: PropsWithChildren) {
     return (
         <QueryProvider>
-            {children}
+            <HelmetProvider>
+                {children}
+            </HelmetProvider>
         </QueryProvider>
     );
 }
