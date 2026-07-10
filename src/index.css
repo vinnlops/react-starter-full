@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/*
+ * Fallback antes do JS aplicar o tema (evita flash sem estilo).
+ * initTheme() em main.tsx sobrescreve tudo isso em runtime.
+ * Os valores reais e únicos ficam em src/config/themes.ts.
+ */
+:root {
+    --color-background: #ffffff;
+    --color-foreground: #17171b;
+    --color-border: #e8e8ea;
+}
+
+@theme {
+    --color-background: var(--color-background);
+    --color-foreground: var(--color-foreground);
+    --color-border: var(--color-border);
+
+    --color-primary-100: var(--color-primary-100);
+    --color-primary-300: var(--color-primary-300);
+    --color-primary-500: var(--color-primary-500);
+    --color-primary-700: var(--color-primary-700);
+    --color-primary-900: var(--color-primary-900);
+
+    --color-secondary-100: var(--color-secondary-100);
+    --color-secondary-300: var(--color-secondary-300);
+    --color-secondary-500: var(--color-secondary-500);
+    --color-secondary-700: var(--color-secondary-700);
+    --color-secondary-900: var(--color-secondary-900);
+
+    --color-muted-100: var(--color-muted-100);
+    --color-muted-200: var(--color-muted-200);
+    --color-muted-300: var(--color-muted-300);
+    --color-muted-400: var(--color-muted-400);
+    --color-muted-500: var(--color-muted-500);
+    --color-muted-600: var(--color-muted-600);
+    --color-muted-700: var(--color-muted-700);
+    --color-muted-800: var(--color-muted-800);
+    --color-muted-900: var(--color-muted-900);
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3 {
+    font-family: "Cormorant Garamond", serif;
+}
