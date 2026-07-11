@@ -315,6 +315,12 @@ npm run lint      # eslint
 npm run preview   # preview do build de produção
 ```
 
+## Observação sobre Deploy
+
+Este projeto utiliza React Router com Browser History API. Para que rotas como `/dashboard` ou `/users/1` funcionem após atualização da página, o servidor deve redirecionar requisições desconhecidas para `index.html`.
+
+Consulte a documentação da plataforma de hospedagem utilizada para configurar o fallback de rotas.
+
 ## Convenções gerais
 
 - Alias `@/` aponta para `src/` (configurado no `tsconfig` e `vite.config`).
