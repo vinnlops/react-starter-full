@@ -1,4 +1,5 @@
 import { themes, themeTokenKeys, defaultTheme, type ThemeName } from "@/config/themes";
+import { usePreferencesStore } from "@/store";
 
 const STORAGE_KEY = "app-theme";
 
@@ -23,6 +24,11 @@ export function applyTheme(theme: ThemeName): void {
 export function getTheme(): ThemeName {
     const current = document.documentElement.dataset.theme as ThemeName | undefined;
     return current ?? getStoredTheme() ?? defaultTheme;
+}
+
+export function changeTheme(theme: ThemeName) {
+    applyTheme(theme);
+    usePreferencesStore.getState().setTheme(theme);
 }
 
 function getStoredTheme(): ThemeName | null {

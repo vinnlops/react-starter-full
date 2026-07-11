@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import type { PreferencesState, Theme } from "./preferences.types";
+import { defaultTheme } from "@/config/themes";
+import { applyTheme } from "@/utils/theme";
 
 interface PreferencesStore extends PreferencesState {
     setTheme(theme: Theme): void;
@@ -10,11 +12,19 @@ interface PreferencesStore extends PreferencesState {
 export const usePreferencesStore = create<PreferencesStore>()(
     persist(
         (set) => ({
-            theme: "system",
+
+            theme: defaultTheme,
 
             setTheme(theme) {
-                set({ theme });
+
+                applyTheme(theme);
+
+                set({
+                    theme,
+                });
+
             },
+
         }),
         {
             name: "preferences-storage",

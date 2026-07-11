@@ -6,6 +6,9 @@ import { router } from "./app/router";
 import { AppProviders } from "./providers/AppProviders";
 
 import './index.css'
+import { initTheme } from "./utils/theme";
+
+initTheme()
 
 ReactDOM.createRoot(
     document.getElementById("root")!
