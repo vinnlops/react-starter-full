@@ -2,6 +2,12 @@
 
 Template inicial React + TypeScript + Vite, estruturado para escalar em projetos grandes. Essa versão (**full**) já vem com camada de comunicação com backend (Axios + React Query) integrada.
 
+## Documentação
+
+Além deste README, o projeto possui uma documentação completa com guias, exemplos e referências para as principais funcionalidades e padrões adotados.
+
+**Acesse a documentação:** https://react-starter-docs.vercel.app/docs/introducao
+
 ## Stack
 
 - **React 19** + **TypeScript**
